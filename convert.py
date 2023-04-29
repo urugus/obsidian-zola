@@ -58,7 +58,7 @@ if __name__ == "__main__":
                     f"date: {doc_path.modified}",
                     f"updated: {doc_path.modified}",
                     "template: docs/page.html",
-                    f'tags = [{", ".join([f"{tag.strip()}" for tag in tags])}]',
+                    f'tags: [{", ".join([f'"{tag.strip()}"' for tag in tags])}]',
                     "---",
                     # To add last line-break
                     "",
