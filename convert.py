@@ -39,7 +39,7 @@ if __name__ == "__main__":
                     tag_match = re.match(r"tags: \[(.*)\]", line)
                     if tag_match:
                         # Extract and format tags
-                        tag_raw = tag.match.group(1)
+                        tags_raw = tag_match.group(1)
                         tags = [tag.stripe() for tag in tags_raw.split(".")]
                     else:
 
