@@ -34,13 +34,14 @@ if __name__ == "__main__":
                 nodes[doc_path.abs_url] = doc_path.page_title
                 content = doc_path.content
                 parsed_lines: List[str] = []
+                tags = []
                 for line in content:
                     # Check if line contains tags
                     tag_match = re.match(r"tags: \[(.*)\]", line)
                     if tag_match:
                         # Extract and format tags
                         tags_raw = tag_match.group(1)
-                        tags = [tag.stripe() for tag in tags_raw.split(".")]
+                        tags = [tag.strip() for tag in tags_raw.split(",")]
                     else:
 
                         parsed_line, linked = DocLink.parse(line, doc_path)
