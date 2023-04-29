@@ -41,17 +41,16 @@ if __name__ == "__main__":
                     if tag_match:
                         # Extract and format tags
                         tags_raw = tag_match.group(1)
-                        tags = [f'"{tag.strip()}"' for tag in tags_raw.split(",")]
-                    else:
+                        tags = tags_raw.split(",")
 
-                        parsed_line, linked = DocLink.parse(line, doc_path)
+                    parsed_line, linked = DocLink.parse(line, doc_path)
 
-                        # Fix LaTEX new lines
-                        parsed_line = re.sub(r"\\\\\s*$", r"\\\\\\\\", parsed_line)
+                    # Fix LaTEX new lines
+                    parsed_line = re.sub(r"\\\\\s*$", r"\\\\\\\\", parsed_line)
 
-                        parsed_lines.append(parsed_line)
+                    parsed_lines.append(parsed_line)
 
-                        edges.extend([doc_path.edge(rel_path) for rel_path in linked])
+                    edges.extend([doc_path.edge(rel_path) for rel_path in linked])
 
                 content = [
                     "---",
@@ -59,7 +58,7 @@ if __name__ == "__main__":
                     f"date: {doc_path.modified}",
                     f"updated: {doc_path.modified}",
                     "template: docs/page.html",
-                    f"tags = [{', '.join(tags)}]",
+                    f'tags = [{", ".join([f"{tag.strip()}" for tag in tags])}]',
                     "---",
                     # To add last line-break
                     "",
