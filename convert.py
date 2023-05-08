@@ -34,15 +34,7 @@ if __name__ == "__main__":
                 nodes[doc_path.abs_url] = doc_path.page_title
                 content = doc_path.content
                 parsed_lines: List[str] = []
-                tags = []
                 for line in content:
-                    # Check if line contains tags
-                    tag_match = re.match(r"tags: \[(.*)\]", line)
-                    if tag_match:
-                        # Extract and format tags
-                        tags_raw = tag_match.group(1)
-                        tags = tags_raw.split(",")
-
                     parsed_line, linked = DocLink.parse(line, doc_path)
 
                     # Fix LaTEX new lines
@@ -58,7 +50,6 @@ if __name__ == "__main__":
                     f"date: {doc_path.modified}",
                     f"updated: {doc_path.modified}",
                     "template: docs/page.html",
-                    f'tags: [{", ".join([f'"{tag.strip()}"' for tag in tags])}]',
                     "---",
                     # To add last line-break
                     "",
