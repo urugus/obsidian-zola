@@ -40,6 +40,34 @@
 {% endblock body %}
 
 {% block content %}
+
+<!-- support mermaid.js -->
+<style>
+    pre.mermaid {
+        display: flex;
+        justify-content: center;
+        align-content: flex-start;
+        height: fit-content;
+    }
+</style>
+
+<script type='module'>
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.esm.min.mjs';
+
+    Array.from(document.querySelectorAll('pre.language-mermaid')).forEach(
+        (elem) => {
+            elem.classList.add('mermaid');
+            elem.innerHTML = elem.innerText;
+        }
+    )
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'dark',
+        flowchart: { useMaxWidth: false, htmlLabels: true }
+    });
+</script>
+<!-- support mermaid.js -->
+
 <div class="wrap container" role="document">
   <div class="content">
     <div class="row justify-content-center">
