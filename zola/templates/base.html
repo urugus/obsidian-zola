@@ -36,6 +36,8 @@
     if (localStorage.getItem("theme") === "dark" || (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
       document.body.classList.add("dark");
     }
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
   </script>
   {% block header %}
     {{ macros_header::header(current_section="/") }}
